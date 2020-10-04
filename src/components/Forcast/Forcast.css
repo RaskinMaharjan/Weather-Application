@@ -1,0 +1,10 @@
+.forcast {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 2px 3px #cccccc;
+    padding:15px;
+    text-align: center;
+}
