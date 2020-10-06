@@ -1,23 +1,19 @@
 import React from 'react';
 import './Forcast.css';
 
-const forcast = (props) => {
-
-    let content = null; 
-    if(props.data.hasOwnProperty('main'))  {
-        
-     content =     <div className = 'forcast'>
-                         <p>It is currently {props.data.main.temp} degree Celcus with humidity {props.data.main.humidity}</p>
-                    </div>
-    }
-
+const Forcast = (props) => {
+  if (props.data.hasOwnProperty('main')) {
     return (
-        <div>
-        {content}                
-        </div>
-    
+      <div className="forcast">
+        <p>
+          It is currently {props.data.main.temp} degree Celcus with humidity{' '}
+          {props.data.main.humidity}
+        </p>
+      </div>
     );
+  }
 
-}
+  return null;
+};
 
-export default forcast;
+export default Forcast;
