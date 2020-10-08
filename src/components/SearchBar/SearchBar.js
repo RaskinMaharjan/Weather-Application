@@ -34,7 +34,7 @@ const SearchBar = (props) => {
         <label htmlFor="celcius">Celcius</label>
       </div>
 
-      <button onClick={props.fetchData}> Get Forcast </button>
+      <button onClick={() => props.fetchData()}> Get Forcast </button>
     </div>
   );
 };
