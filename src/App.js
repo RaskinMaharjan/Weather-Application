@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Forcast from './components/Forcast/Forcast';
 import SearchBar from './components/SearchBar/SearchBar';
+import axios from 'axios';
 
 import './App.css';
 
@@ -10,6 +11,7 @@ class App extends Component {
     city: 'Kathmandu',
     unit: 'metric',
     weatherData: {},
+    buttonClicked : false
   };
 
   onCityChangeHandler = (e) => {
@@ -22,49 +24,31 @@ class App extends Component {
     this.setState({ unit: unit });
   };
 
-  fetchWeatherData = () => {
-    // TODO: fetch response data from open weather map api
-    const city = this.state.city;
-    const unit = this.state.unit;
+  onClickHandler = () => {
+    this.setState({ buttonClicked: true });
+  }
 
-    this.setState({
-      weatherData: {
-        coord: { lon: 85.32, lat: 27.72 },
-        weather: [
-          {
-            id: 803,
-            main: 'Clouds',
-            description: 'broken clouds',
-            icon: '04n',
-          },
-        ],
-        base: 'stations',
-        main: {
-          temp: 23,
-          feels_like: 25.2,
-          temp_min: 23,
-          temp_max: 23,
-          pressure: 1013,
-          humidity: 83,
-        },
-        visibility: 7000,
-        wind: { speed: 2.1, deg: 270 },
-        clouds: { all: 75 },
-        dt: 1601818551,
-        sys: {
-          type: 1,
-          id: 9201,
-          country: 'NP',
-          sunrise: 1601770372,
-          sunset: 1601812903,
-        },
-        timezone: 20700,
-        id: 1283240,
-        name: 'Kathmandu',
-        cod: 200,
-      },
+  componentDidUpdate() {
+    let config = {
+      headers: {
+        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
+        "x-rapidapi-key": "9ce1f3d28emsh383c2ca823ec97fp1feca7jsn22216afc98ed",
+        "useQueryString": true
+      }
+    }
+    if(this.state.buttonClicked){
+      axios.get('https://community-open-weather-map.p.rapidapi.com/weather?units=' + this.state.unit + '&q=' + this.state.city,config)
+    .then(response => {
+      console.log(response);
+      this.setState({
+        weatherData : response.data,
+        buttonClicked : false
+      });
+
     });
-  };
+    
+  }
+}
 
   render() {
     return (
@@ -75,11 +59,11 @@ class App extends Component {
         <SearchBar
           city={this.state.city}
           unit={this.state.unit}
-          fetchData={this.fetchWeatherData}
+          fetchData={this.onClickHandler}
           handleUnit={this.onUnitChangeHandler}
           handleCity={this.onCityChangeHandler}
         />
-        <Forcast data={this.state.weatherData} />
+        <Forcast data={this.state.weatherData} unit={this.state.unit} />
       </div>
     );
   }
