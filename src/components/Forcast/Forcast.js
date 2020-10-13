@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Forcast.css';
-import { WEATHERS } from '../constants';
+import { getWeatherImage } from '../Helper/helper';
 
 const Forcast = (props) => {
   const { weather, name, main } = props.data;
@@ -31,40 +31,6 @@ const Forcast = (props) => {
   }
 
   return null;
-};
-
-const getWeatherImage = (weather) => {
-  switch (weather) {
-    case WEATHERS.CLOUDY:
-      return (
-        <img
-          alt="Cloudy"
-          src="//ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-        ></img>
-      );
-
-    case WEATHERS.RAINY:
-      return (
-        <img
-          alt="Scattered showers"
-          src="//ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png"
-          data-atf="1"
-        ></img>
-      );
-
-    case WEATHERS.CLEAR:
-      return (
-        <img
-          alt="Clear"
-          src="//ssl.gstatic.com/onebox/weather/64/sunny.png"
-          id="wob_tci"
-          data-atf="1"
-        ></img>
-      );
-
-    default:
-      return weather;
-  }
 };
 
 export default Forcast;
