@@ -8,3 +8,37 @@
   padding: 15px;
   text-align: center;
 }
+
+.weather-card {
+  color: #636363;
+  padding: 9px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.weather-card h2,
+h4,
+h5 {
+  margin: 5px 0;
+}
+
+.weather-card-leftbox {
+  float: left;
+  text-transform: capitalize;
+  margin-right: 40px;
+}
+
+.weather-card-rightbox {
+  float: right;
+}
+
+.weather-icon {
+  float: left;
+}
+
+.weather-temperature {
+  float: right;
+  font-size: 40px;
+  padding-top: 4px;
+}
