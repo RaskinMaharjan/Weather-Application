@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Forcast from './components/Forcast/Forcast';
 import SearchBar from './components/SearchBar/SearchBar';
 import ForcastWeekly from './components/forcast-weekly/forcast-weekly';
-import axios from 'axios';
+import { getCurrentWeather, getWeeklyWeather } from './Api/weather-api';
 
 import './App.css';
 
@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     city: 'Kathmandu',
     unit: 'metric',
-    weatherData: {}
+    weatherData: {},
+    weeklyData: []
   };
 
   onCityChangeHandler = e => {
@@ -25,28 +26,18 @@ class App extends Component {
   };
 
   getForecast = unit => {
-    let config = {
-      headers: {
-        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
-        'x-rapidapi-key': '9ce1f3d28emsh383c2ca823ec97fp1feca7jsn22216afc98ed',
-        useQueryString: true
-      }
-    };
+    const { city } = this.state;
 
-    axios
-      .get(
-        'https://community-open-weather-map.p.rapidapi.com/weather?units=' +
-          unit +
-          '&q=' +
-          this.state.city,
-        config
-      )
-      .then(response => {
-        this.setState({
-          weatherData: response.data,
-          unit
-        });
+    getCurrentWeather(city, unit).then(response => {
+      this.setState({
+        weatherData: response.data,
+        unit
       });
+    });
+
+    getWeeklyWeather(city, unit).then(response => {
+      this.setState({ weeklyData: response.data.list });
+    });
   };
 
   render() {
@@ -61,7 +52,10 @@ class App extends Component {
               <Forcast data={this.state.weatherData} unit={this.state.unit} />
             </div>
             <div className="day-section">
-              <ForcastWeekly></ForcastWeekly>
+              <ForcastWeekly
+                unit={this.state.unit}
+                weeklyData={this.state.weeklyData}
+              ></ForcastWeekly>
             </div>
             <div className="change-location">
               <SearchBar

@@ -45,6 +45,14 @@
   font-weight: 700;
 }
 
+.weekly-weather-icon {
+  height: 50px;
+}
+
+.weekly-weather-icon img {
+  height: 60px;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .App > .container {
     margin: 0 7%;
