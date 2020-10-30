@@ -39,7 +39,7 @@ const SearchBar = props => {
       </div>
 
       <div className="forcast-button">
-        <button onClick={() => props.fetchData(unit)}> Get Forcast </button>
+        <button onClick={() => props.fetchData(unit)}> Get Forecast </button>
       </div>
     </div>
   );

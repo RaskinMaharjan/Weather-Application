@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Forcast.css';
+import './Forecast.css';
 import { getCurrentUnit, getWeatherImage } from '../Helper/helper';
 
-const Forcast = (props) => {
+const Forecast = props => {
   const { weather, name, main } = props.data;
 
   const days = [
@@ -13,12 +13,12 @@ const Forcast = (props) => {
     'Wednesday',
     'Thursday',
     'Friday',
-    'Saturday',
+    'Saturday'
   ];
   const today = new Date();
   const dayName = days[today.getDay()];
 
-  const capitalizeFirstLetter = (string) => {
+  const capitalizeFirstLetter = string => {
     const splitStr = string.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
       splitStr[i] =
@@ -115,4 +115,4 @@ const Forcast = (props) => {
   );
 };
 
-export default Forcast;
+export default Forecast;

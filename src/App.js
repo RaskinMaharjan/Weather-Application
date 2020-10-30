@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Forcast from './components/Forcast/Forcast';
+import Forecast from './components/Forecast/Forecast';
 import SearchBar from './components/SearchBar/SearchBar';
-import ForcastWeekly from './components/forcast-weekly/forcast-weekly';
+import ForecastWeekly from './components/ForecastWeekly/ForecastWeekly';
 import { getCurrentWeather, getWeeklyWeather } from './Api/weather-api';
 
 import './App.css';
@@ -53,13 +53,13 @@ class App extends Component {
         <div className="container">
           <div className="main d-flex flex-column">
             <div className="forecast-section">
-              <Forcast data={this.state.weatherData} unit={this.state.unit} />
+              <Forecast data={this.state.weatherData} unit={this.state.unit} />
             </div>
             <div className="day-section">
-              <ForcastWeekly
+              <ForecastWeekly
                 unit={this.state.unit}
                 weeklyData={this.state.weeklyData}
-              ></ForcastWeekly>
+              ></ForecastWeekly>
             </div>
             <div className="change-location">
               <SearchBar
