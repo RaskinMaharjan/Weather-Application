@@ -24,8 +24,7 @@ class App extends Component {
     this.setState({ unit: unit });
   };
 
-  getForecast = () => {
-    // this.setState({ buttonClicked: true });
+  getForecast = unit => {
     let config = {
       headers: {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
@@ -37,7 +36,7 @@ class App extends Component {
     axios
       .get(
         'https://community-open-weather-map.p.rapidapi.com/weather?units=' +
-          this.state.unit +
+          unit +
           '&q=' +
           this.state.city,
         config
@@ -45,7 +44,7 @@ class App extends Component {
       .then(response => {
         this.setState({
           weatherData: response.data,
-          buttonClicked: false
+          unit
         });
       });
   };
