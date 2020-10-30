@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Forcast from './components/Forcast/Forcast';
 import SearchBar from './components/SearchBar/SearchBar';
 import ForcastWeekly from './components/forcast-weekly/forcast-weekly';
-import axios from 'axios';
+import { getCurrentWeather, getWeeklyWeather } from './Api/weather-api';
 
 import './App.css';
 
@@ -26,42 +26,17 @@ class App extends Component {
   };
 
   onClickHandler = () => {
-    this.getWeather();
-  };
+    const { unit, city } = this.state;
 
-  getWeather = () => {
-    let config = {
-      headers: {
-        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
-        'x-rapidapi-key': '9ce1f3d28emsh383c2ca823ec97fp1feca7jsn22216afc98ed',
-        useQueryString: true,
-      },
-    };
-    axios
-      .get(
-        'https://community-open-weather-map.p.rapidapi.com/weather?units=' +
-          this.state.unit +
-          '&q=' +
-          this.state.city,
-        config
-      )
-      .then((response) => {
-        this.setState({
-          weatherData: response.data,
-        });
+    getCurrentWeather(city, unit).then((response) => {
+      this.setState({
+        weatherData: response.data,
       });
-
-    axios
-      .get(
-        'https://community-open-weather-map.p.rapidapi.com/forecast/daily?units=' +
-          this.state.unit +
-          '&q=' +
-          this.state.city,
-        config
-      )
-      .then((response) => {
-        this.setState({ weeklyData: response.data.list });
-      });
+    });
+    
+    getWeeklyWeather(city, unit).then((response) => {
+      this.setState({ weeklyData: response.data.list });
+    });
   };
 
   render() {
