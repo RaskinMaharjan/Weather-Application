@@ -1,9 +1,9 @@
 import React from 'react';
-import './forcast-weekly.css';
+import './ForecastWeekly.css';
 
 import { getDays, getCurrentUnit, getWeatherImage } from '../Helper/helper';
 
-const ForcastWeekly = (props) => {
+const ForecastWeekly = props => {
   let dayCounter = -1;
   const weeklyDays = getDays();
   let unit = getCurrentUnit(props.unit);
@@ -33,4 +33,4 @@ const ForcastWeekly = (props) => {
   );
 };
 
-export default ForcastWeekly;
+export default ForecastWeekly;

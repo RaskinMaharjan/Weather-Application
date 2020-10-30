@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Forcast from './components/Forcast/Forcast';
 import SearchBar from './components/SearchBar/SearchBar';
-import ForcastWeekly from './components/forcast-weekly/forcast-weekly';
+import ForcastWeekly from './components/ForecastWeekly/ForecastWeekly';
 import { getCurrentWeather, getWeeklyWeather } from './Api/weather-api';
 
 import './App.css';
