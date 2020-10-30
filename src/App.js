@@ -12,29 +12,29 @@ class App extends Component {
     city: 'Kathmandu',
     unit: 'metric',
     weatherData: {},
-    weeklyData: [],
+    weeklyData: []
   };
 
-  onCityChangeHandler = (e) => {
+  onCityChangeHandler = e => {
     const city = e.target.value;
     this.setState({ city: city });
   };
 
-  onUnitChangeHandler = (e) => {
+  onUnitChangeHandler = e => {
     const unit = e.target.value;
     this.setState({ unit: unit });
   };
 
-  onClickHandler = () => {
+  getForecast = () => {
     const { unit, city } = this.state;
 
-    getCurrentWeather(city, unit).then((response) => {
+    getCurrentWeather(city, unit).then(response => {
       this.setState({
-        weatherData: response.data,
+        weatherData: response.data
       });
     });
-    
-    getWeeklyWeather(city, unit).then((response) => {
+
+    getWeeklyWeather(city, unit).then(response => {
       this.setState({ weeklyData: response.data.list });
     });
   };
@@ -60,7 +60,7 @@ class App extends Component {
               <SearchBar
                 city={this.state.city}
                 unit={this.state.unit}
-                fetchData={this.onClickHandler}
+                fetchData={this.getForecast}
                 handleUnit={this.onUnitChangeHandler}
                 handleCity={this.onCityChangeHandler}
               />
