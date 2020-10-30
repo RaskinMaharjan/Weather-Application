@@ -25,12 +25,13 @@ class App extends Component {
     this.setState({ unit: unit });
   };
 
-  getForecast = () => {
-    const { unit, city } = this.state;
+  getForecast = unit => {
+    const { city } = this.state;
 
     getCurrentWeather(city, unit).then(response => {
       this.setState({
-        weatherData: response.data
+        weatherData: response.data,
+        unit
       });
     });
 
