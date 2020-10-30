@@ -25,6 +25,10 @@ class App extends Component {
     this.setState({ unit: unit });
   };
 
+  componentDidMount() {
+    this.getForecast(this.state.unit);
+  }
+
   getForecast = unit => {
     const { city } = this.state;
 
