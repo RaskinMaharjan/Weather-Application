@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     city: 'Kathmandu',
     unit: 'metric',
-    weatherData: {}
+    weatherData: {},
+    weeklyData: []
   };
 
   onCityChangeHandler = e => {
@@ -25,7 +26,10 @@ class App extends Component {
   };
 
   getForecast = () => {
-    // this.setState({ buttonClicked: true });
+    this.getWeather();
+  };
+
+  getWeather = () => {
     let config = {
       headers: {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
@@ -44,9 +48,20 @@ class App extends Component {
       )
       .then(response => {
         this.setState({
-          weatherData: response.data,
-          buttonClicked: false
+          weatherData: response.data
         });
+      });
+
+    axios
+      .get(
+        'https://community-open-weather-map.p.rapidapi.com/forecast/daily?units=' +
+          this.state.unit +
+          '&q=' +
+          this.state.city,
+        config
+      )
+      .then(response => {
+        this.setState({ weeklyData: response.data.list });
       });
   };
 
@@ -62,7 +77,10 @@ class App extends Component {
               <Forcast data={this.state.weatherData} unit={this.state.unit} />
             </div>
             <div className="day-section">
-              <ForcastWeekly></ForcastWeekly>
+              <ForcastWeekly
+                unit={this.state.unit}
+                weeklyData={this.state.weeklyData}
+              ></ForcastWeekly>
             </div>
             <div className="change-location">
               <SearchBar
